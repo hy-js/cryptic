@@ -20,6 +20,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "import.js", "src/pages/upload.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "import.js", "src/pages/upload.jsx", "src/pages/_document.js"],
   "exclude": ["node_modules"]
 }

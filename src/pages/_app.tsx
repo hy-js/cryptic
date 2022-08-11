@@ -16,7 +16,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
     <>
       <QueryClientProvider client={client}>
         <Navbar />
-        <main className='animation:fade-in p-4 min-h-screen flex flex-col items-center'>
+        <main className='animation:fade-in p-4 flex flex-col items-center'>
           <Component {...pageProps} />
         </main>
       </QueryClientProvider>
