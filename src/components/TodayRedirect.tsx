@@ -1,23 +1,13 @@
 import { useRouter } from "next/router"
-import { useEffect } from "react"
-import getDate from "@/utils/getDate"
+import { useEffect } from 'react';
 
-const TodayRedirect: React.FC = () => {
-  const router = useRouter()
-  const { currentYear, currentMonth, currentDay } = getDate()
+const TodayRedirect = () => {
+  const router = useRouter();
 
   useEffect(() => {
-    router.replace({
-      pathname: "/puzzle/[year]/[month]/[day]",
-      query: {
-        year: currentYear,
-        month: currentMonth,
-        day: currentDay
-      }
-    })
-  }, [router])
-
-  return null
-}
+    router.replace('/puzzle/today');
+  });
+};
 
 export default TodayRedirect
+

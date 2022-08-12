@@ -1,17 +1,21 @@
 import React from "react"
 import { useRouter } from "next/router"
+import getDate from '@/utils/getDate';
 
 const Date = () => {
-  const router = useRouter()
-  const { year, month, day } = router.query
+  const { currentYear, currentMonth, currentDay } = getDate();
 
   return (
     <div className='navbar flex w-min-screen items-center justify-center bg-neutral-200'>
       <h2 className='text-lg text-[1rem] leading-normal font-extrabold'>
-        {day} / {month} / {year}
+        {currentDay} / {currentMonth} / {currentYear}
       </h2>
     </div>
-  )
-}
+  );
+};
 
-export default Date
+export default Date;
+
+
+
+
