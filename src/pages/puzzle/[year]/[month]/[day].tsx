@@ -1,67 +1,178 @@
 import type { NextPage } from "next"
-import Header from "@/components/Header"
-import { useState } from "react"
-import { useEffect } from "react"
-import getDate from "@/utils/getDate"
+import { prisma } from "@/server/db/client"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/router"
+import Chevron from "@/components/Navbar/Chevron"
+import useWindowSize, { Size } from "@/hooks/useWindowSize"
+import Confetti from "react-confetti"
 
-const Today: NextPage = () => {
-  const { dayNumber } = getDate()
-  const [message, setMessage] = useState("")
-  const [answer, setAnswer] = useState("")
-  const [win, setWin] = useState(false)
-  const [data, setData] = useState(null)
-  const [isLoading, setLoading] = useState(false)
+const Today: NextPage = ({ firstClue, secondClue }) => {
+  const { width, height }: Size = useWindowSize()
+  const [across, setAcross] = useState("")
+  const [down, setDown] = useState("")
 
-  useEffect(() => {
-    setLoading(true)
-    fetch(`/api/puzzle/read/${dayNumber}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        setAnswer(data.answer)
-        setLoading(false)
-      })
-  }, [])
+  const [showDown, setAcrossShow] = useState(false)
+  const [showAcross, setDownShow] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
-  const handleChange = (event) => {
-    setMessage(event.target.value)
-    if (message.toUpperCase() === answer) {
-      setWin(true)
-      setMessage("")
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (across.toUpperCase() === firstClue.answer) {
+      setAcrossShow(true)
+    }
+    if (down.toUpperCase() === secondClue.answer) {
+      setDownShow(true)
     }
   }
 
   return (
-    <main className='animation:fade-in container mx-auto flex flex-col items-center min-h-screen p-4'>
-      <Header />
-      <div className='flex flex-col items-stretch'>
-        {isLoading && <p>Loading...</p>}
-        {!isLoading && !data ? <p>No cryptic today</p> : <h2>{data?.clue}</h2>}
-        <input
-          type='text'
-          className='border border-gray-400 rounded-lg p-2'
-          id='message'
-          name='message'
-          onChange={handleChange}
-          value={message}
-        />
+    <div className='flex flex-col w-min-screen justify-center'>
+      <Chevron />
+      <div className='border border-gray-500 p-4 m-2 bg-neutral-100 items-stretch my-2'>
+        <h4 className='underline text-xl'>Across:</h4>
+        <h3 className='text-xl'>{firstClue.clue}</h3>
+        <form onSubmit={onSubmit}>
+          {showAcross ? (
+            <input
+              type='text'
+              disabled
+              value={firstClue.Answer}
+              className='border border-gray-500 w-full text-xl my-2 bg-yellow-300 uppercase'
+            />
+          ) : (
+            <input
+              autoFocus
+              name='across'
+              id='across'
+              type='text'
+              autoComplete='off'
+              onChange={(e) => setAcross(e.target.value)}
+              maxLength={firstClue.answer.length}
+              className='border border-gray-500 w-full text-xl my-2 focus:bg-yellow-300 uppercase'
+              required
+            />
+          )}
+          <hr />
+          <h4 className='underline text-xl'>Down:</h4>
+          <h3 className='text-xl'>{secondClue.clue}</h3>
+          {showAcross ? (
+            <input
+              type='text'
+              disabled
+              value={secondClue.Answer}
+              className='border border-gray-500 w-full text-xl my-2 bg-yellow-300 uppercase'
+            />
+          ) : (
+            <input
+              autoFocus
+              name='down'
+              id='down'
+              type='text'
+              autoComplete='off'
+              onChange={(e) => setDown(e.target.value)}
+              maxLength={secondClue.answer.length}
+              className='border border-gray-500 w-full text-xl my-2 focus:bg-yellow-300 uppercase'
+              required
+            />
+          )}
+          <button
+            type='submit'
+            className='bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow w-full'>
+            Submit
+          </button>
+        </form>
       </div>
-      {win && (
+      {showAcross && showDown && (
         <>
-          <h3 className='text-purple-300'>You win!</h3>
-          <h4 className='text-purple-300'>{data?.description}</h4>
+          <Confetti width={width} height={height} recycle={false} />
+          <div className='border border-gray-500 p-4 m-2 bg-neutral-100 items-stretch my-2'>
+            {firstClue.answer.split("").map((letter, index) => (
+              <span
+                key={index}
+                className='border-2 px-2 m-1 border-gray-500 bg-white'>
+                {letter}
+              </span>
+            ))}
+            <div className='flex flex-col'>
+              {secondClue.answer.split("").map((letter, index) => (
+                <span
+                  key={index}
+                  className='border-2 px-2 m-1 border-gray-500 w-8 bg-white'>
+                  {letter}
+                </span>
+              ))}
+              <h2>{firstClue.definition}</h2>
+              <h2>{secondClue.definition}</h2>
+            </div>
+          </div>
         </>
       )}
-      {/* <div className='flex justify-between items-stretch w-1/3'>
-        <button>
-          <h3 className='underline'> Back</h3>
-        </button>
-        <button>
-          <h3 className='underline'>Next</h3>
-        </button>
-      </div> */}
-    </main>
+    </div>
   )
 }
 
 export default Today
+
+// Sever Side Rendering
+export async function getServerSideProps(context) {
+  const { year, month, day } = context.params
+  const dbClues = await prisma.puzzle.findMany({
+    take: 2,
+    where: {
+      setDate: `${year}-${month}-${day}`
+    }
+  })
+  console.log(dbClues)
+  if (dbClues.length > 0) {
+    return {
+      props: {
+        firstClue: dbClues[0],
+        secondClue: dbClues[1]
+      }
+    }
+  }
+
+  // Otherwise get ser new clues for the day
+
+  // Randomizer
+  const puzzlesCount = await prisma.puzzle.count()
+  const skip = Math.floor(Math.random() * puzzlesCount)
+  // Get two clues
+  const clues = await prisma.puzzle.findMany({
+    take: 2,
+    skip: skip,
+    where: {
+      setDate: {
+        contains: "NIL"
+      }
+    }
+  })
+
+  await prisma.puzzle.update({
+    where: {
+      rowId: clues[0].rowId
+    },
+    data: {
+      setDate: `${year}-${month}-${day}`
+    }
+  })
+
+  await prisma.puzzle.update({
+    where: {
+      rowId: clues[1].rowId
+    },
+    data: {
+      setDate: `${year}-${month}-${day}`
+    }
+  })
+
+  console.log(clues)
+
+  return {
+    props: {
+      firstClue: clues[0],
+      secondClue: clues[1]
+    }
+  }
+}
+

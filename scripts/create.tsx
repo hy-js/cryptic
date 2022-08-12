@@ -1,16 +1,19 @@
 // src/pages/api/examples.ts
 import type { NextApiRequest, NextApiResponse } from "next"
 import { prisma } from "@/server/db/client"
+import axios from "axios"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const response = await axios.get(`https://cryptics.georgeho.org/data/clues.json?_sort=rowid&puzzle_date__contains=${}`)
+    const response = await axios.get(
+      `https://cryptics.georgeho.org/data/clues.json?_next=1000`
+    )
     let {
       data: { rows }
     } = response
     try {
       rows.forEach(async (element: string) => {
-        const newClue = await prisma.clue.create({
+        await prisma.puzzle.create({
           data: {
             rowId: element[0],
             clue: element[1],

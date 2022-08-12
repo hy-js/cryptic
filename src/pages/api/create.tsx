@@ -6,14 +6,14 @@ import axios from "axios"
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const response = await axios.get(
-      `https://cryptics.georgeho.org/data/clues.json?source=fifteensquared&_next=94460%2C94460&_sort=rowid`
+      `https://cryptics.georgeho.org/data/clues.json?_next=1000`
     )
     let {
       data: { rows }
     } = response
     try {
       rows.forEach(async (element: string) => {
-        const newClue = await prisma.clue.create({
+        await prisma.puzzle.create({
           data: {
             rowId: element[0],
             clue: element[1],
