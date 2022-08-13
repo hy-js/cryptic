@@ -1,11 +1,11 @@
 import { Dialog, Transition } from "@headlessui/react"
-import { Fragment, useState } from "react"
+import { Fragment } from "react"
 type Props = {
   open: boolean
   setIsOpen: (val: boolean) => void
 }
 
-export const Modal: React.FC<Props> = ({ open, setIsOpen }) => {
+export const HelpModal: React.FC<Props> = ({ open, setIsOpen }) => {
   function closeModal() {
     setIsOpen(false)
   }
@@ -187,4 +187,4 @@ export const Modal: React.FC<Props> = ({ open, setIsOpen }) => {
   )
 }
 
-export default Modal
+export default HelpModal
