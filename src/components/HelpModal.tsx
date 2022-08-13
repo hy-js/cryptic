@@ -37,39 +37,71 @@ export const HelpModal: React.FC<Props> = ({ open, setIsOpen }) => {
                 <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
                   <Dialog.Title
                     as='h3'
-                    className='text-2xl font-medium leading-6 text-gray-900'>
-                    <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                      C
-                    </span>
-                    <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                      R
-                    </span>
-                    <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                      Y
-                    </span>
-                    <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                      P
-                    </span>
-                    <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                      T
-                    </span>
-                    <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                      I
-                    </span>
-                    <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                      X
-                    </span>
-                    <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
-                      L
-                    </span>
-                    <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
-                      E
-                    </span>
+                    className='text-2xl font-medium leading-6 text-gray-900 text-center'>
+                    <div>
+                      {/* <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
+                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+                          W
+                        </span>
+                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+                          E
+                        </span>
+                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+                          L
+                        </span>
+                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+                          C
+                        </span>
+                      </h2>
+                      <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
+                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+                          O
+                        </span>
+                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+                          M
+                        </span>
+                        <span className='bg-yellow-300  border-2 px-2 m-1 border-gray-500'>
+                          E
+                        </span>
+                        <span className='px-2 m-1 '>to</span>
+                      </h2>
+                      <br /> */}
+                      <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
+                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+                          C
+                        </span>
+                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+                          R
+                        </span>
+                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+                          Y
+                        </span>
+                      </h2>
+                      <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
+                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+                          P
+                        </span>
+                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+                          T
+                        </span>
+                        <span className='bg-white border-2 px-2.5 m-1 border-gray-500'>
+                          I
+                        </span>
+                      </h2>
+                      <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
+                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+                          X
+                        </span>
+                        <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
+                          L
+                        </span>
+                        <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
+                          E
+                        </span>
+                      </h2>
+                    </div>
                   </Dialog.Title>
                   <div className='mt-4'>
-                    <p className='text-lg my-2'>
-                      Welcome to <span className='uppercase'>Cryptixle</span>!
-                    </p>
                     <p className='text-lg  my-2'>
                       Solve both Cryptic Crossword clues to win.
                     </p>

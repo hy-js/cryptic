@@ -13,6 +13,43 @@ const Navbar = () => {
   }
   return (
     <>
+      <div className='flex w-min-screen items-center justify-center bg-neutral-100'>
+        <div>
+          <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
+            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+              C
+            </span>
+            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+              R
+            </span>
+            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+              Y
+            </span>
+          </h2>
+          <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
+            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+              P
+            </span>
+            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+              T
+            </span>
+            <span className='bg-white border-2 px-2.5 m-1 border-gray-500'>
+              I
+            </span>
+          </h2>
+          <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
+            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
+              X
+            </span>
+            <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
+              L
+            </span>
+            <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
+              E
+            </span>
+          </h2>
+        </div>
+      </div>
       <div className='navbar flex w-min-screen items-center justify-center bg-neutral-100 border-b border-gray-500'>
         <div onClick={openModal}>
           <svg
@@ -29,36 +66,10 @@ const Navbar = () => {
             />
           </svg>
         </div>
-        <Link href={"/puzzle/today"}>
-          <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
-            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-              C
-            </span>
-            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-              R
-            </span>
-            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-              Y
-            </span>
-            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-              P
-            </span>
-            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-              T
-            </span>
-            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-              I
-            </span>
-            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-              X
-            </span>
-            <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
-              L
-            </span>
-            <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
-              E
-            </span>
-          </h2>
+        <Link href={"/"}>
+          <h1 className='text-xl text-[1.75rem] leading-normal uppercase cursor-pointer'>
+            Cryptixle
+          </h1>
         </Link>
         {router.asPath.split("/")[2] === "today" ? (
           <Link href={"/puzzle/random"}>
