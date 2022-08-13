@@ -1,31 +1,38 @@
-import type { NextPage } from 'next';
-import { prisma } from '@/server/db/client';
-import { useState, useEffect } from 'react';
-import useWindowSize, { Size } from '@/hooks/useWindowSize';
-import Confetti from 'react-confetti';
-import getDate from '@/utils/getDate';
+import { InferGetServerSidePropsType } from "next"
+import { prisma } from "@/server/db/client"
+import { useState, useEffect } from "react"
+import useWindowSize, { Size } from "@/hooks/useWindowSize"
+import Confetti from "react-confetti"
 
-const Today: NextPage = ({ firstClue, secondClue }) => {
-  const { width, height }: Size = useWindowSize();
-  const [across, setAcross] = useState('');
-  const [down, setDown] = useState('');
+export type Clue = {
+  clue: string
+  answer: string
+}
 
-  const [showDown, setDownShow] = useState(false);
-  const [showAcross, setAcrossShow] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+const Random = ({
+  firstClue,
+  secondClue
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { width, height }: Size = useWindowSize()
+  const [across, setAcross] = useState("")
+  const [down, setDown] = useState("")
+
+  const [showDown, setDownShow] = useState(false)
+  const [showAcross, setAcrossShow] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   const onSubmitAcross = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     if (across.toUpperCase() === firstClue.answer) {
-      setAcrossShow(true);
+      setAcrossShow(true)
     }
-  };
+  }
   const onSubmitDown = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     if (down.toUpperCase() === secondClue.answer) {
-      setDownShow(true);
+      setDownShow(true)
     }
-  };
+  }
 
   return (
     <div className='flex flex-col w-min-screen justify-center'>
@@ -36,7 +43,7 @@ const Today: NextPage = ({ firstClue, secondClue }) => {
             <input
               type='text'
               disabled
-              value={firstClue.Answer}
+              value={firstClue.answer}
               className='border border-gray-500 w-full text-xl my-2 bg-yellow-300 uppercase'
             />
           ) : (
@@ -64,7 +71,7 @@ const Today: NextPage = ({ firstClue, secondClue }) => {
             <input
               type='text'
               disabled
-              value={secondClue.Answer}
+              value={secondClue.answer}
               className='border border-gray-500 w-full text-xl my-2 bg-yellow-300 uppercase'
             />
           ) : (
@@ -90,33 +97,31 @@ const Today: NextPage = ({ firstClue, secondClue }) => {
         <Confetti width={width} height={height} recycle={false} />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Today;
-
-// Sever Side Rendering
-export async function getServerSideProps(context) {
+export default Random
+export async function getServerSideProps() {
   // Randomizer
-  const puzzlesCount = await prisma.puzzle.count();
-  const skip = Math.floor(Math.random() * puzzlesCount);
+  const puzzlesCount = await prisma.puzzle.count()
+  const skip = Math.floor(Math.random() * puzzlesCount)
   // Get two clues
   const clues = await prisma.puzzle.findMany({
     take: 2,
     skip: skip,
     where: {
       setDate: {
-        contains: 'NIL'
+        contains: "NIL"
       }
     }
-  });
-  console.log(clues);
+  })
+  const firstClue: Clue = clues[0]
+  const secondClue: Clue = clues[1]
 
   return {
     props: {
-      firstClue: clues[0],
-      secondClue: clues[1]
+      firstClue,
+      secondClue
     }
-  };
+  }
 }
-
