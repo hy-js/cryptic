@@ -86,7 +86,6 @@ const Today = ({
             />
           ) : (
             <input
-              autoFocus
               name='down'
               id='down'
               type='text'
