@@ -511,11 +511,6 @@ chokidar@^3.5.3:
   optionalDependencies:
     fsevents "~2.3.2"
 
-clsx@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.2.1.tgz#0ddc4a20a549b59c93a4116bb26f5294ca17dc12"
-  integrity sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
-
 color-convert@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/color-convert/-/color-convert-2.0.1.tgz"
@@ -553,11 +548,6 @@ cross-spawn@^7.0.2:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
-
-crosswords-js@^0.1.11:
-  version "0.1.11"
-  resolved "https://registry.yarnpkg.com/crosswords-js/-/crosswords-js-0.1.11.tgz#2a91c2e4ddf5911dd109726217def1c2c79d8dfc"
-  integrity sha512-hAxM+g31aNKxp69MsGPhz0ugYlpnywV6kzi0Ihzh40d7FFo1zcA2VTeH5jSXCs8PBAbIbVV9vD8ozMv63ixPDA==
 
 cssesc@^3.0.0:
   version "3.0.0"
