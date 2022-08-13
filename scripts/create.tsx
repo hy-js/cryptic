@@ -12,7 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       data: { rows }
     } = response
     try {
-      rows.forEach(async (element: string) => {
+      rows.forEach(async (element) => {
         await prisma.puzzle.create({
           data: {
             rowId: element[0],
