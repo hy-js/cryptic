@@ -10,9 +10,11 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
     "@prisma/client": "^4.2.0",
     "@tanstack/react-query": "^4.0.10",
     "axios": "^0.27.2",
+    "clsx": "^1.2.1",
     "crosswords-js": "^0.1.11",
     "next": "12.2.3",
     "react": "18.2.0",
