@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer"
 import { Html, Head, Main, NextScript } from "next/document"
 
 export default function Document() {
@@ -15,7 +16,6 @@ export default function Document() {
           name='keywords'
           content='cryptic, crossword, wordle, puzzle, game'
         />
-        <link rel='manifest' href='/manifest.json' />
         <link
           href='/icons/icon-32.png'
           rel='icon'
@@ -23,15 +23,14 @@ export default function Document() {
           sizes='32x32'
         />
         <link rel='apple-touch-icon' href='/icons/icon-192.png'></link>
-        <meta name='theme-color' content='#6aaa64' />
-        <link
-          rel='stylesheet'
-          href='https://fonts.googleapis.com/css2?family=Open+Sans&display=swap'
-        />
+        <meta name='theme-color' content='#fafafa' />
       </Head>
-      <body>
-        <Main />
+      <body className='flex flex-col h-screen'>
+        <div className='flex-grow flex-shrink-0 basis-auto'>
+          <Main />
+        </div>
         <NextScript />
+        <Footer />
       </body>
     </Html>
   )

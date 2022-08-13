@@ -1,13 +1,11 @@
+import { useState } from "react"
 import { InferGetServerSidePropsType } from "next"
 import { prisma } from "@/server/db/client"
-import { useState, useEffect } from "react"
 import useWindowSize, { Size } from "@/hooks/useWindowSize"
 import Confetti from "react-confetti"
+import { Clue } from "@/constants/types"
 
-export type Clue = {
-  clue: string
-  answer: string
-}
+import WinModal from "@/components/WinModal"
 
 const Random = ({
   firstClue,
@@ -19,26 +17,36 @@ const Random = ({
 
   const [showDown, setDownShow] = useState(false)
   const [showAcross, setAcrossShow] = useState(false)
-  const [showModal, setShowModal] = useState(false)
+  let [isOpen, setIsOpen] = useState(false)
 
-  const onSubmitAcross = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (across.toUpperCase() === firstClue.answer) {
+    if (
+      across.toUpperCase() === firstClue.answer &&
+      down.toUpperCase() === secondClue.answer
+    ) {
       setAcrossShow(true)
-    }
-  }
-  const onSubmitDown = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (down.toUpperCase() === secondClue.answer) {
+      setDownShow(true)
+      setIsOpen(true)
+    } else if (across.toUpperCase() === firstClue.answer) {
+      setAcrossShow(true)
+    } else if (down.toUpperCase() === secondClue.answer) {
       setDownShow(true)
     }
   }
 
   return (
     <div className='flex flex-col w-min-screen justify-center'>
-      <div className='border border-gray-500 p-4 m-2 bg-neutral-100 items-stretch my-2'>
-        <h3 className='text-xl'>{firstClue.clue}</h3>
-        <form onSubmit={onSubmitAcross}>
+      <form onSubmit={onSubmit}>
+        <div className='border border-gray-500 p-4 m-2 bg-neutral-100 items-stretch my-2'>
+          <p className='text-gray-400'>{firstClue.puzzleName}</p>
+          <h3 className='text-xl'>
+            <span className='uppercase'>
+              {firstClue.clueNumber}
+              {") "}
+            </span>
+            {firstClue.clue}
+          </h3>
           {showAcross ? (
             <input
               type='text'
@@ -58,15 +66,16 @@ const Random = ({
               className='border border-gray-500 w-full text-xl my-2 focus:bg-slate-300 uppercase'
             />
           )}
-          <button
-            type='submit'
-            className='hidden bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow w-full'>
-            Submit
-          </button>
-        </form>
-        <hr />
-        <form onSubmit={onSubmitDown}>
-          <h3 className='text-xl'>{secondClue.clue}</h3>
+        </div>
+        <div className='border border-gray-500 p-4 m-2 bg-neutral-100 items-stretch my-2'>
+          <p className='text-gray-400'>{secondClue.puzzleName}</p>
+          <h3 className='text-xl'>
+            <span className='uppercase'>
+              {secondClue.clueNumber}
+              {") "}
+            </span>
+            {secondClue.clue}
+          </h3>
           {showDown ? (
             <input
               type='text'
@@ -86,16 +95,25 @@ const Random = ({
               className='border  border-gray-500 w-full text-xl my-2 focus:bg-neutral-100 uppercase'
             />
           )}
-          <button
-            type='submit'
-            className='bg-white hidden hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow w-full'>
-            Submit
-          </button>
-        </form>
-      </div>
-      {showAcross && showDown && (
-        <Confetti width={width} height={height} recycle={false} />
+        </div>
+        <button
+          type='submit'
+          className='bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow w-full'>
+          Submit
+        </button>
+      </form>
+      {isOpen && (
+        <>
+          <Confetti width={width} height={height} recycle={false} />
+        </>
       )}
+      <WinModal
+        open={isOpen}
+        setIsOpen={setIsOpen}
+        firstClue={firstClue}
+        secondClue={secondClue}
+        source={"random"}
+      />
     </div>
   )
 }
@@ -117,6 +135,8 @@ export async function getServerSideProps() {
   })
   const firstClue: Clue = clues[0]
   const secondClue: Clue = clues[1]
+
+  console.log(clues)
 
   return {
     props: {
