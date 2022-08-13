@@ -1,8 +1,13 @@
-import type { NextPage } from "next"
-import TodayRedirect from "../components/TodayRedirect"
+import { useRouter } from "next/router"
+import { useEffect } from "react"
 
-const Home: NextPage = () => {
-  return <TodayRedirect />
+const Home: React.FC = () => {
+  const router = useRouter()
+
+  useEffect(() => {
+    router.replace("/puzzle/today")
+  })
+  return <h2>Loading...</h2>
 }
 
 export default Home
