@@ -5,18 +5,10 @@ import { Fragment } from "react"
 type Props = {
   open: boolean
   setIsOpen: (val: boolean) => void
-  firstClue: Clue
-  secondClue: Clue
   source: string
 }
 
-export const WinModal: React.FC<Props> = ({
-  open,
-  setIsOpen,
-  firstClue,
-  secondClue,
-  source
-}) => {
+export const WinModal: React.FC<Props> = ({ open, setIsOpen, source }) => {
   function closeModal() {
     setIsOpen(false)
   }
@@ -45,31 +37,19 @@ export const WinModal: React.FC<Props> = ({
                 leave='ease-in duration-200'
                 leaveFrom='opacity-100 scale-100'
                 leaveTo='opacity-0 scale-95'>
-                <Dialog.Panel className='text-center w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                <Dialog.Panel className='text-center w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 align-middle shadow-xl transition-all'>
                   <Dialog.Title
                     as='h3'
-                    className='text-2xl font-medium leading-6 text-gray-900 text-center'>
-                    <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
+                    className='text-2xl font-medium leading-6 text-gray-900 flex mt-5 flex-wrap justify-center '>
+                    <div className='bg-yellow-300 border border-gray-500 h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
                       W
-                    </span>
-                    <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
+                    </div>
+                    <div className='bg-yellow-300 border border-gray-500 h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
                       I
-                    </span>
-                    <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
+                    </div>
+                    <div className='bg-yellow-300 border border-gray-500 h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
                       N
-                    </span>
-                    <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
-                      N
-                    </span>
-                    <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
-                      E
-                    </span>
-                    <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
-                      R
-                    </span>
-                    <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
-                      !
-                    </span>
+                    </div>
                   </Dialog.Title>
                   <div className='mt-4'>
                     {source === "today" ? (
@@ -79,24 +59,6 @@ export const WinModal: React.FC<Props> = ({
                     ) : (
                       <p className='text-lg my-2 text-center'>Great job!</p>
                     )}
-                    <h3 className='mt-4'>
-                      {firstClue.answer.split("").map((letter, index) => (
-                        <span
-                          className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'
-                          key={index}>
-                          {letter}
-                        </span>
-                      ))}
-                    </h3>
-                    <h3 className='mt-4'>
-                      {secondClue.answer.split("").map((letter, index) => (
-                        <span
-                          className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'
-                          key={index}>
-                          {letter}
-                        </span>
-                      ))}
-                    </h3>
                   </div>
 
                   <div className='mt-4 inline-flex justify-center'>

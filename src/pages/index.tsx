@@ -7,7 +7,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     router.replace("/puzzle/today")
   })
-  return <h2>Loading...</h2>
+  return null
 }
 
 export default Home
