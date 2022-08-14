@@ -14,43 +14,37 @@ const Navbar = () => {
   return (
     <>
       <div className='flex w-min-screen items-center justify-center bg-neutral-100'>
-        <div>
-          <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
-            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-              C
-            </span>
-            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-              R
-            </span>
-            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-              Y
-            </span>
+        <div className=' flex mt-5 flex-wrap justify-center'>
+          <h2 className='border border-gray-500 font-extrabold h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
+            C
           </h2>
-          <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
-            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-              P
-            </span>
-            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-              T
-            </span>
-            <span className='bg-white border-2 px-2.5 m-1 border-gray-500'>
-              I
-            </span>
+          <h2 className=' border border-gray-500 font-extrabold h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
+            R
           </h2>
-          <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
-            <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-              X
-            </span>
-            <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
-              L
-            </span>
-            <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
-              E
-            </span>
+          <h2 className='border border-gray-500  font-extrabold h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
+            Y
+          </h2>
+          <h2 className='border border-gray-500 font-extrabold h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
+            P
+          </h2>
+          <h2 className=' border border-gray-500 font-extrabold h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
+            T
+          </h2>
+          <h2 className='border border-gray-500 font-extrabold h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
+            I
+          </h2>
+          <h2 className='border border-gray-500 font-extrabold h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
+            X
+          </h2>
+          <h2 className='bg-yellow-300 font-extrabold border border-gray-500 h-10 w-10 text-2xl flex justify-center items-center uppercase text-center'>
+            L
+          </h2>
+          <h2 className='bg-yellow-300 font-extrabold border border-gray-500 h-10 w-10 text-2xl flex justify-center items-center uppercase text-center'>
+            E
           </h2>
         </div>
       </div>
-      <div className='navbar flex w-min-screen items-center justify-center bg-neutral-100 border-b border-gray-500'>
+      <div className='navbar flex w-min-screen items-center justify-center bg-neutral-100 '>
         <div onClick={openModal}>
           <svg
             xmlns='http://www.w3.org/2000/svg'

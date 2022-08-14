@@ -3,9 +3,17 @@
 @tailwind utilities;
 
 body {
-   background-color: #fafafa;
+  background-color: #fafafa;
 }
 
-h1, h2 , h3, h4, p{
-   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+h1,
+h2,
+h3,
+h4,
+p,
+input
+{
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
+
+
