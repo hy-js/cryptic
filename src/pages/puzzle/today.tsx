@@ -46,50 +46,49 @@ const Today = ({
       {todayClue ? (
         <>
           <div className='flex mt-5 flex-wrap'>
-            {parsedGuess
-              ? parsedGuess.map((letter, i) =>
-                  letter === "*" ? (
-                    <div
-                      key={i}
-                      className='border border-gray-500 h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'></div>
-                  ) : (
-                    <h2
-                      key={i}
-                      className='bg-yellow-300 border border-gray-500 h-10 w-10 text-2xl flex justify-center items-center uppercase text-center'>
-                      {letter}
-                    </h2>
-                  )
-                )
-              : [...Array(todayClue.answer.length)].map((i) => (
+            {parsedGuess &&
+              parsedGuess.map((letter, i) =>
+                letter === "*" ? (
                   <div
                     key={i}
                     className='border border-gray-500 h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'></div>
-                ))}
+                ) : (
+                  <h2
+                    key={i}
+                    className='bg-yellow-300 border border-gray-500 h-10 w-10 text-2xl flex justify-center items-center uppercase text-center'>
+                    {letter}
+                  </h2>
+                )
+              )}
+            {parsedGuess.length == 0 &&
+              [...Array(todayClue.answer.length)].map((i) => (
+                <div
+                  key={i}
+                  className='border border-gray-500 h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'></div>
+              ))}
           </div>
           <form onSubmit={onSubmit}>
-            <div className='border border-gray-500 p-4 m-2 bg-neutral-100 items-stretch my-2'>
+            <div className='border border-gray-500 p-4 m-2 bg-neutral-100 my-2'>
               <p className='text-gray-400'>{todayClue.puzzleName}</p>
-              <h3 className='text-xl'>
+              <h4 className='text-xl sm:text-lg'>
                 {todayClue.clueNumber}
                 {") "}
                 <span>{todayClue.clue}</span>
-              </h3>
-              <div className='flex flex-row justify-center px-2 mt-5'>
-                <input
-                  autoFocus
-                  name='across'
-                  id='across'
-                  type='text'
-                  autoComplete='off'
-                  onChange={handleGuess}
-                  maxLength={todayClue.answer.length}
-                  className='border border-gray-500 h-10 text-2xl flex justify-center items-center bg-white uppercase text-center'
-                />
-              </div>
+              </h4>
+              <input
+                autoFocus
+                name='across'
+                id='across'
+                type='text'
+                autoComplete='off'
+                onChange={handleGuess}
+                maxLength={todayClue.answer.length}
+                className='border border-gray-500 bg-white uppercase text-xl flex justify-center my-2'
+              />
             </div>
             <button
               type='submit'
-              className='bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2  border border-gray-400 rounded shadow w-full'>
+              className='bg-white hover:bg-yellow-200 text-gray-800 font-semibold py-2  border border-gray-400 shadow w-full'>
               Submit
             </button>
           </form>

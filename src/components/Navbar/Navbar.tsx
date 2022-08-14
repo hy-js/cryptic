@@ -1,8 +1,9 @@
 import Link from "next/link"
 import { useState } from "react"
 import { useRouter } from "next/router"
-
+import Image from "next/image"
 import { HelpModal } from "../HelpModal"
+import logo from "../../../public/cryptixle_logo.png"
 
 const Navbar = () => {
   const router = useRouter()
@@ -14,35 +15,7 @@ const Navbar = () => {
   return (
     <>
       <div className='flex w-min-screen items-center justify-center bg-neutral-100'>
-        <div className=' flex mt-5 flex-wrap justify-center'>
-          <h2 className='border border-gray-500 font-extrabold h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
-            C
-          </h2>
-          <h2 className=' border border-gray-500 font-extrabold h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
-            R
-          </h2>
-          <h2 className='border border-gray-500  font-extrabold h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
-            Y
-          </h2>
-          <h2 className='border border-gray-500 font-extrabold h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
-            P
-          </h2>
-          <h2 className=' border border-gray-500 font-extrabold h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
-            T
-          </h2>
-          <h2 className='border border-gray-500 font-extrabold h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
-            I
-          </h2>
-          <h2 className='border border-gray-500 font-extrabold h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'>
-            X
-          </h2>
-          <h2 className='bg-yellow-300 font-extrabold border border-gray-500 h-10 w-10 text-2xl flex justify-center items-center uppercase text-center'>
-            L
-          </h2>
-          <h2 className='bg-yellow-300 font-extrabold border border-gray-500 h-10 w-10 text-2xl flex justify-center items-center uppercase text-center'>
-            E
-          </h2>
-        </div>
+        <Image src={logo} alt='Cryptixle Logo' width={110} height={110} />
       </div>
       <div className='navbar flex w-min-screen items-center justify-center bg-neutral-100 '>
         <div onClick={openModal}>
