@@ -112,11 +112,10 @@ const Today = ({
 }
 
 export default Today
-
-// Sever Side Rendering
+// Sever Side Renderin
 export async function getServerSideProps() {
   const { currentDay, currentMonth, currentYear } = getDate()
-  const clue = await prisma.puzzle.findFirstOrThrow({
+  const clue = await prisma.puzzle.findFirst({
     where: {
       setDate: `${currentYear}-${currentMonth}-${currentDay}`
     }
