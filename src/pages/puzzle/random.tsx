@@ -1,120 +1,37 @@
-import { useState } from "react"
 import { InferGetServerSidePropsType } from "next"
 import { prisma } from "@/server/db/client"
-import useWindowSize, { Size } from "@/hooks/useWindowSize"
-import Confetti from "react-confetti"
 import { Clue } from "@/constants/types"
+import OTPInput from "@/components/OTPInput"
 
-import WinModal from "@/components/WinModal"
-
-const Random = ({
-  randomClue
+const Today = ({
+  todayClue
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { width, height }: Size = useWindowSize()
-  const [guess, setGuess] = useState("")
-  const [parsedGuess, setParsedGuess] = useState<string[]>([])
-  let [isOpen, setIsOpen] = useState(false)
+  if (!todayClue) return <p>No clue today. Try again tomorrow.</p>
 
-  const handleGuess = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value)
-    setGuess(e.target.value)
-  }
-
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (!randomClue) return
-    parseLetters(guess)
-    if (guess.toUpperCase() === randomClue.answer) {
-      setIsOpen(true)
-    }
-  }
-  const parseLetters = (guess: string) => {
-    if (!randomClue) return
-    let guessLetters = guess.toUpperCase().split("")
-    const answerLetters = randomClue.answer.split("")
-    guessLetters.forEach((letter, i) => {
-      if (letter !== answerLetters[i]) {
-        guessLetters[i] = "*"
-      }
-    })
-    setParsedGuess(guessLetters)
-  }
+  const goal = todayClue.answer.replace(/\s/g, "")
 
   return (
     <div className='flex flex-col w-min-screen justify-center items-center'>
-      {randomClue ? (
-        <>
-          <div className='flex mt-5 flex-wrap'>
-            {parsedGuess &&
-              parsedGuess.map((letter, i) =>
-                letter === "*" ? (
-                  <div
-                    key={i}
-                    className='border border-gray-500 h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'></div>
-                ) : (
-                  <h2
-                    key={i}
-                    className='bg-yellow-300 border border-gray-500 h-10 w-10 text-2xl flex justify-center items-center uppercase text-center'>
-                    {letter}
-                  </h2>
-                )
-              )}
-            {parsedGuess.length == 0 &&
-              [...Array(randomClue.answer.length)].map((i) => (
-                <div
-                  key={i}
-                  className='border border-gray-500 h-10 w-10 text-2xl flex justify-center items-center bg-white uppercase text-center'></div>
-              ))}
-          </div>
-          <form onSubmit={onSubmit}>
-            <div className='border border-gray-500 p-4 m-2 bg-neutral-100 my-2'>
-              <p className='text-gray-400'>{randomClue.puzzleName}</p>
-              <h4 className='text-xl sm:text-lg'>
-                {randomClue.clueNumber}
-                {") "}
-                <span>{randomClue.clue}</span>
-              </h4>
-              <input
-                autoFocus
-                name='across'
-                id='across'
-                type='text'
-                autoComplete='off'
-                onChange={handleGuess}
-                maxLength={randomClue.answer.length}
-                className='border border-gray-500 bg-white uppercase text-xl flex justify-center my-2'
-              />
-            </div>
-            <button
-              type='submit'
-              className='bg-white hover:bg-yellow-200 text-gray-800 font-semibold py-2  border border-gray-400 shadow w-full'>
-              Submit
-            </button>
-          </form>
-        </>
-      ) : (
-        <div className='flex flex-col justify-center items-center'>
-          <div className='text-xl text-center'>
-            <p>No clues today</p>
-            <p>Check back tomorrow</p>
-          </div>
-        </div>
-      )}
-      {isOpen && (
-        <>
-          <Confetti width={width} height={height} recycle={false} />
-        </>
-      )}
-      <WinModal open={isOpen} setIsOpen={setIsOpen} source={"today"} />
+      <div className='border border-gray-500 p-4 m-2 bg-neutral-100 my-2 text-center'>
+        <p className='text-gray-400 text-lg sm:text-xl'>
+          {todayClue.puzzleName} - {todayClue.clueNumber.toUpperCase()}
+        </p>
+        <h4 className='text-xl sm:text-2xl'>{todayClue.clue}</h4>
+      </div>
+      <OTPInput autoFocus length={goal.length} goal={goal} />
     </div>
   )
 }
 
-export default Random
+export default Today
+// Sever Side Renderin
 export async function getServerSideProps() {
+  // Otherwise get set new clues for the day
+  // Randomizer
   const puzzlesCount = await prisma.puzzle.count()
   const skip = Math.floor(Math.random() * puzzlesCount)
-  const randomClue: Clue = await prisma.puzzle.findFirstOrThrow({
+  // Get two clues
+  const randomClue = await prisma.puzzle.findFirst({
     skip: skip,
     where: {
       setDate: {
@@ -123,10 +40,11 @@ export async function getServerSideProps() {
     }
   })
 
-  console.log(randomClue)
+  const todayClue: Clue | null = randomClue
+
   return {
     props: {
-      randomClue
+      todayClue
     }
   }
 }

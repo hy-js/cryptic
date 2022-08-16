@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-function Timer(j) {
+function Timer() {
   const [counter, setCounter] = useState(0)
 
   useEffect(() => {

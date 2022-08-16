@@ -1,5 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react"
 import { Fragment } from "react"
+import Image from "next/image"
+import logo from "../../public/cryptixle_logo.png"
+
 type Props = {
   open: boolean
   setIsOpen: (val: boolean) => void
@@ -38,97 +41,42 @@ export const HelpModal: React.FC<Props> = ({ open, setIsOpen }) => {
                   <Dialog.Title
                     as='h3'
                     className='text-2xl font-medium leading-6 text-gray-900 text-center'>
-                    <div>
-                      {/* <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
-                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                          W
-                        </span>
-                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                          E
-                        </span>
-                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                          L
-                        </span>
-                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                          C
-                        </span>
-                      </h2>
-                      <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
-                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                          O
-                        </span>
-                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                          M
-                        </span>
-                        <span className='bg-yellow-300  border-2 px-2 m-1 border-gray-500'>
-                          E
-                        </span>
-                        <span className='px-2 m-1 '>to</span>
-                      </h2>
-                      <br /> */}
-                      <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
-                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                          C
-                        </span>
-                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                          R
-                        </span>
-                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                          Y
-                        </span>
-                      </h2>
-                      <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
-                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                          P
-                        </span>
-                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                          T
-                        </span>
-                        <span className='bg-white border-2 px-2.5 m-1 border-gray-500'>
-                          I
-                        </span>
-                      </h2>
-                      <h2 className='text-xl text-[1.75rem] leading-normal font-extrabold cursor-pointer'>
-                        <span className='bg-white border-2 px-2 m-1 border-gray-500'>
-                          X
-                        </span>
-                        <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
-                          L
-                        </span>
-                        <span className='bg-yellow-300 border-2 px-2 m-1 border-gray-500'>
-                          E
-                        </span>
-                      </h2>
-                    </div>
+                    <Image
+                      src={logo}
+                      alt='Cryptixle Logo'
+                      width={110}
+                      height={110}
+                    />
+                    <h2 className='text-xl font-extrabold my-2'>Help</h2>
                   </Dialog.Title>
                   <div className='mt-4'>
                     <p className='text-lg  my-2'>
-                      Solve both Cryptic Crossword clues to win.
+                      Solve the Cryptic Crossword clue to win.
                     </p>
-
                     <details className='mt-4'>
                       <summary className='text-gray-500'>
                         How do I play?
                       </summary>
                       <p className='text-lg  my-2'>
-                        After each guess, hit the Enter button to submit. The
-                        color of the input will change to show you got it right!
+                        After a guess, hit the Enter button to submit. The color
+                        of the input will change if you got it right!
                       </p>
                       <p className='text-lg  my-2'>
-                        Answer both clues to win the game. Come back tomorrow!
+                        Answer correctly to win the game and come back tomorrow
+                        for a new clue.
                       </p>
-                      <p className='text-lg  my-2'>
+                      {/* <p className='text-lg  my-2'>
                         Want to keep playing? Press the refresh icon to get a
                         random cryptic clue.
-                      </p>
+                      </p> */}
                     </details>
                     <details className='mt-4'>
                       <summary className='text-gray-500'>
                         How do I solve a Cryptic Crossword Clue?
                       </summary>
                       <p className='text-lg  my-2'>
-                        Happy to help! Basically each clue is made up of a
-                        definition and indicators.
+                        Basically each clue is made up of a definition and
+                        indicators.
                       </p>
                       <h3 className='text-xl my-2'>Definition:</h3>
                       <p className='text-lg my-2'>
@@ -138,9 +86,12 @@ export const HelpModal: React.FC<Props> = ({ open, setIsOpen }) => {
                       </p>
                       <h3 className='text-xl my-2'>Indicators:</h3>
                       <p className='text-lg my-2'>
-                        These help you reach the solution. They could suggest
+                        These help you reach the solution. They might suggest
                         you anagram part of the clue, remove letters or find a
-                        hidden word. Take a look at this example:
+                        hidden word etc.
+                      </p>
+                      <p className='text-lg my-2'>
+                        Take a look at this example:
                       </p>
                       <p className='text-xl  my-2'>
                         <span>{"15D)"}</span>
@@ -163,7 +114,6 @@ export const HelpModal: React.FC<Props> = ({ open, setIsOpen }) => {
                         </p>
                       </details>
 
-                      <hr />
                       <p className='text-lg  my-2'>
                         <a
                           href='https://www.newyorker.com/puzzles-and-games-dept/cryptic-crossword/reintroducing-the-new-yorkers-cryptic-crossword'
