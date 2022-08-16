@@ -3,4 +3,5 @@ export type Clue = {
   answer: string
   clueNumber: string
   puzzleName: string
+  rowId: number
 }

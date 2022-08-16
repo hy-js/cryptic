@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar/Navbar"
 import { useState, useEffect } from "react"
 import router from "next/router"
 
+
 const MyApp: AppType = ({ Component, pageProps }) => {
   const client = new QueryClient({
     defaultOptions: {

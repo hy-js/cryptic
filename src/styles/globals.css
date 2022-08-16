@@ -11,8 +11,7 @@ h2,
 h3,
 h4,
 p,
-input
-{
+input {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
@@ -20,4 +19,20 @@ h3 {
   word-wrap: break-word;
 }
 
+.otpInput {
+  text-transform: uppercase;
+  width: 3rem !important;
+  height: 3rem;
+  font-size: 2rem;
+  text-align: center;
+  border: 1px solid black;
+}
 
+/*  Add breakpoint for iPhone */
+@media only screen and (max-width: 375px) {
+  .otpInput {
+    width: 2.25rem !important;
+    height: 2.25rem;
+    font-size: 1rem;
+  }
+}

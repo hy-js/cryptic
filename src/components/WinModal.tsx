@@ -68,7 +68,7 @@ export const WinModal: React.FC<Props> = ({ open, setIsOpen, source }) => {
                       onClick={closeModal}>
                       Thanks!
                     </button>
-                    {source === "today" && (
+                    {/* {source === "today" && (
                       <Link href={"/puzzle/random"}>
                         <button
                           type='button'
@@ -76,7 +76,7 @@ export const WinModal: React.FC<Props> = ({ open, setIsOpen, source }) => {
                           Play a random clue.
                         </button>
                       </Link>
-                    )}
+                    )} */}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

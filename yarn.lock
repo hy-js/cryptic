@@ -1450,6 +1450,11 @@ next-seo@^5.5.0:
   resolved "https://registry.yarnpkg.com/next-seo/-/next-seo-5.5.0.tgz#12bdfce60a6ae098f49617357a166c2d44dbc29e"
   integrity sha512-5ouBHFtx8YrSDW44lj0qIEQ+oMcz6stgoITB+SqHUZbhgizoJsyLmq73gJ0lxtEKpcN8vG2QgRIJfdb8OAPChw==
 
+next-themes@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/next-themes/-/next-themes-0.2.0.tgz#fdc507f61e95b3ae513dee8d4783bcec8c02e3a3"
+  integrity sha512-myhpDL4vadBD9YDSHiewqvzorGzB03N84e+3LxCwHRlM/hiBOaW+UsKsQojQAzC7fdcJA0l2ppveXcYaVV+hxQ==
+
 next@12.2.3:
   version "12.2.3"
   resolved "https://registry.npmjs.org/next/-/next-12.2.3.tgz"
@@ -2133,3 +2138,8 @@ zod@^3.17.3:
   version "3.17.10"
   resolved "https://registry.npmjs.org/zod/-/zod-3.17.10.tgz"
   integrity sha512-IHXnQYQuOOOL/XgHhgl8YjNxBHi3xX0mVcHmqsvJgcxKkEczPshoWdxqyFwsARpf41E0v9U95WUROqsHHxt0UQ==
+
+zustand-immer-store@^0.9.4:
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/zustand-immer-store/-/zustand-immer-store-0.9.4.tgz#1c4251a59f3cd6207f6caca592f0dbc31f55d9da"
+  integrity sha512-1DC2djOVIUzk2DRsYJ/+XtYIo+UIJ9dM6I4uW6jXyzZh9nEIP9eYEEdsOWxHJ6W1fFWeirhn5GtjgAjoIYc8Hg==
